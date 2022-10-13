@@ -33,9 +33,16 @@ async function requestRegistration(e) {
 }
 
 function login(data){
-    localStorage.setItem('username', data.user);
+    // localStorage.setItem('username', data.user);
+    const payload = jwt_decode(data.token);
+    console.log(payload, "payload");
+    console.log(data, "data");
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('username', payload.username);
+    localStorage.setItem('email', payload.email);
     location.hash = '#feed';
 }
+
 
 function logout(){
     localStorage.clear();
